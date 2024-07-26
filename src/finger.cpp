@@ -1,45 +1,26 @@
-class Finger 
+#pragma once
+
+#include <cmath>
+#include "key.h"
+
+class Finger
 {
-public:
-    Finger(int dexterity) : distance_traveled(0), is_pressing(false), dexterity(dexterity), x(0), y(0) {}
+public: 
+    int id;
+    double distanceTravelled;
+    bool isPressed;
+    double dexterity;
+    double currentX, currentY;
+    double homeX, homeY;
 
-    void pressKey(const Key& key, bool already_pressed) 
+    Finger(int id, double homex, double homeY, double dexterity) : id(id), distanceTravelled(0), isPressed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
+
+    void press(const Key& key)
     {
-        double distance = calculateDistance(key);
-        if (!already_pressed) 
-        {
-            distance_traveled += distance / dexterity; // Example calculation
-        } else 
-        {
-            distance_traveled += (distance / dexterity) * 1.5; // Penalty for already pressed key
-        }
-        x = key.getX();
-        y = key.getY();
-        is_pressing = true;
-    }
-
-    void releaseKey() 
-    {
-        is_pressing = false;
-    }
-
-    double getDistanceTraveled() const 
-    {
-        return distance_traveled;
-    }
-
-    bool isPressing() const 
-    {
-        return is_pressing;
-    }
-
-private:
-    double distance_traveled;
-    bool is_pressing;
-    int dexterity;
-    double x, y; // Current position of the finger
-
-    double calculateDistance(const Key& key) {
-        return std::sqrt(std::pow(key.getX() - x, 2) + std::pow(key.getY() - y, 2));
+        double dist = std::sqrt(std::pow(key.x - currentX, 2) + std::pow(key.y - currentY, 2));
+        distanceTravelled += dist;
+        currentX = key.x;
+        currentY = key.y;
+        isPressed = true;
     }
 };

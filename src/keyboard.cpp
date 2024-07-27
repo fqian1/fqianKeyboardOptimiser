@@ -3,6 +3,7 @@
 #include <string>
 #include "finger.h"
 #include "key.h"
+#include "keyboard.h"
 
 class Keyboard
 {
@@ -11,12 +12,27 @@ public:
     std::vector<Key> keys;
     std::vector<Finger> fingers;
     std::unordered_map<char, int> charToKeyMap;
-    std::unordered_map<int, std::vector<int>> keyToFingersMap;
+    std::unordered_map<int, int> keyToFingersMap;
     double score;
 
-    Keyboard(std::string_view charLayout, const std::vector<Key>& keys, const std::vector<Finger>& fingers)
-            : charLayout(charLayout), keys(keys), fingers(fingers), score(0) 
+    Keyboard(const std::vector<Key>& keys, const std::vector<Finger>& fingers)
+            : keys(keys), fingers(fingers), score(0) 
     {
-    
+        for(auto& key : keys)
+        {
+            charToKeyMap[key.regular_char] = key.id;
+            charToKeyMap[key.shift_char] = key.id;
+            keyToFingersMap[key.id] = key.finger_id;
+        }
+    }
+
+    void type(const std::string_view text)
+    {
+        for(char c : text)
+        {
+            int keyId = charToKeyMap['c'];
+            int fingerId = keyToFingersMap[keyId];
+            fingers[fingerId].press(keys[keyId]);
+        }
     }
 };

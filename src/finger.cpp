@@ -1,39 +1,43 @@
-#include <cmath>
-#include "finger.h"
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include "key.h"
+#include "finger.h"
 
-class Finger
-{
-public: 
+class Finger {
+public:
     int id;
     double score;
-    bool isUsed;
     double dexterity;
-    double currentX, currentY;
-    double homeX, homeY;
+    bool isUsed;
+    std::pair<int, int> home_position;
+    std::pair<int, int> current_position;
 
-    Finger(int id, bool hand, double homex, double homeY, double dexterity)
-          : id(id), score(0), isUsed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
+    Finger(int id, std::pair<int, int> home_pos, double dex)
+        : id(id), home_position(home_pos), current_position(home_pos), score(0), dexterity(dex), isUsed(0){}
 
-    void press(const Key& key, bool prevHand)
+    inline double distance(const std::pair<double, double>& p1, const std::pair<double, double>& p2)
     {
-        double dist = std::sqrt(std::pow(key.x - currentX, 2) + std::pow(key.y - currentY, 2));
-        score += std::pow(dist, 1/dexterity) + (isUsed ? 1 : 0);
-        currentX = key.x;
-        currentY = key.y;
-        isUsed = true;
+        double dx = p2.first - p1.first;
+        double dy = p2.second - p1.second;
+        return std::sqrt(dx*dx + dy*dy);
     }
 
-    void move(const Key& key)
+    void press(const Key& key)
     {
-        currentX = key.x;
-        currentY = key.y;
+        score += std::pow(distance(current_position, key.position), 1/dexterity) + (isUsed ? 1 : 0); 
+    }
+    
+    void move_to(std::pair<int, int> position) {
+        current_position = position;
     }
 
-    void release()
-    {
-        isUsed = false;
-        currentX = homeX;
-        currentY = homeY;
+    void print() const {
+        std::cout << "Finger(ID: " << id << ", Home: (" 
+                  << home_position.first << ", " << home_position.second 
+                  << "), Current: (" << current_position.first << ", " 
+                  << current_position.second << "))" << std::endl;
     }
 };

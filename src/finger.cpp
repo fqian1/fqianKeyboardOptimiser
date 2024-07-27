@@ -9,10 +9,10 @@ public:
     double score;
     double dexterity;
     bool isUsed;
-    std::pair<int, int> home_position;
-    std::pair<int, int> current_position;
+    std::pair<double, double> home_position;
+    std::pair<double, double> current_position;
 
-    Finger(int id, std::pair<int, int> home_pos, double dex)
+    Finger(int id, std::pair<double, double> home_pos, double dex)
         : id(id), home_position(home_pos), current_position(home_pos), score(0), dexterity(dex), isUsed(false){}
 
     inline double distance(const std::pair<double, double>& p1, const std::pair<double, double>& p2)

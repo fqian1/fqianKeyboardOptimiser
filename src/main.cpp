@@ -9,14 +9,14 @@
 std::vector<Finger> initFingers()
 {
     std::vector<Finger> fingers;
-    fingers.push_back(Finger(0, std::pair<int, int>(2.25, 2.25), 0.6)); 
-    fingers.push_back(Finger(1, std::pair<int, int>(3.25, 2.25), 0.8)); 
-    fingers.push_back(Finger(2, std::pair<int, int>(4.25, 2.25), 1)); 
-    fingers.push_back(Finger(3, std::pair<int, int>(5.25, 2.25), 0.8)); 
-    fingers.push_back(Finger(4, std::pair<int, int>(6.25, 2.25), 0.8)); 
-    fingers.push_back(Finger(5, std::pair<int, int>(7.25, 2.25), 1)); 
-    fingers.push_back(Finger(6, std::pair<int, int>(8.25, 2.25), 0.8)); 
-    fingers.push_back(Finger(7, std::pair<int, int>(9.25, 2.25), 0.6)); 
+    fingers.push_back(Finger(0, std::pair<double, double>(2.25, 2.25), 0.6)); 
+    fingers.push_back(Finger(1, std::pair<double, double>(3.25, 2.25), 0.8)); 
+    fingers.push_back(Finger(2, std::pair<double, double>(4.25, 2.25), 1)); 
+    fingers.push_back(Finger(3, std::pair<double, double>(5.25, 2.25), 0.8)); 
+    fingers.push_back(Finger(4, std::pair<double, double>(6.25, 2.25), 0.8)); 
+    fingers.push_back(Finger(5, std::pair<double, double>(7.25, 2.25), 1)); 
+    fingers.push_back(Finger(6, std::pair<double, double>(8.25, 2.25), 0.8)); 
+    fingers.push_back(Finger(7, std::pair<double, double>(9.25, 2.25), 0.6)); 
     return fingers;
 }
 
@@ -40,7 +40,7 @@ std::vector<Key> initKeys(std::string_view sv)
         {
             double x{col + 0.5 + rowOffsets[row]};
             int fingerId{fingerAssignments[row][col]};
-            keys.push_back(Key(keyId, std::pair<int, int>(x, y), sv[keyId], sv[keyId + 50], fingerAssignments[row][col]));
+            keys.push_back(Key(keyId, std::pair<double, double>(x, y), sv[keyId], sv[keyId + 50], fingerAssignments[row][col]));
             keyId++;
         }
     }

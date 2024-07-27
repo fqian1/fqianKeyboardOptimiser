@@ -5,7 +5,7 @@
 class Key {
 public:
     int id;
-    std::pair<int, int> position;
+    std::pair<double, double> position;
     char regular_char;
     char shift_char;
     int finger_id;

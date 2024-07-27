@@ -36,7 +36,7 @@ public:
                 double x = 0.5 + col + offsets[row];
                 int fingerId = fingerAssignments[row][col];
                 keys.push_back({keyId, x, y, fingerId});
-                charToKeyMap[str[0]] = str[0] == '\n' ? Key key: keys.back();
+                //charToKeyMap[str[0]] = str[0] == '\n' ? Key key: keys.back();
                 keyId++;
             } 
         }

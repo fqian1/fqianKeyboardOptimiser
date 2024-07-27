@@ -1,19 +1,16 @@
 #pragma once
 
-#include <cmath>
-
 class Finger {
 public:
   int id;
-  bool hand;
-  double distanceTravelled;
-  bool isPressed;
+  double score;
   double dexterity;
-  double currentX, currentY;
-  double homeX, homeY;
+  std::pair<int, int> home_position;
+  std::pair<int, int> current_position;
 
-  Finger(int id, bool hand, double homeX, double homeY, double dexterity);
+  Finger(int id, std::pair<int, int> home_pos, double dex);
 
-  void press(const Key& key, bool prevHand);
-  void release();
+  void press(const Key& key);
+  void returnToHome();
+  void move(const Key& key);
 };

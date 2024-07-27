@@ -1,8 +1,5 @@
 #include <iostream>
-#include <unordered_map>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include <cmath>
 #include "key.h"
 #include "finger.h"
 
@@ -16,7 +13,7 @@ public:
     std::pair<int, int> current_position;
 
     Finger(int id, std::pair<int, int> home_pos, double dex)
-        : id(id), home_position(home_pos), current_position(home_pos), score(0), dexterity(dex), isUsed(0){}
+        : id(id), home_position(home_pos), current_position(home_pos), score(0), dexterity(dex), isUsed(false){}
 
     inline double distance(const std::pair<double, double>& p1, const std::pair<double, double>& p2)
     {
@@ -28,10 +25,18 @@ public:
     void press(const Key& key)
     {
         score += std::pow(distance(current_position, key.position), 1/dexterity) + (isUsed ? 1 : 0); 
+        current_position = key.position;
+        isUsed = true;
+    }
+
+    void returnToHome()
+    {
+        isUsed = false;
+        current_position = home_position;
     }
     
-    void move_to(std::pair<int, int> position) {
-        current_position = position;
+    void move(const Key& key) {
+        current_position = key.position;
     }
 
     void print() const {

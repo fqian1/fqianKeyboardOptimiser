@@ -7,12 +7,14 @@
 class Keyboard
 {
 public: 
+    std::string_view charLayout;
     std::vector<Key> keys;
-    std::unordered_map<char, Key> charToKeyMap;
     std::vector<Finger> fingers;
+    std::unordered_map<char, Key> charToKeyMap;
+    std::unordered_map<int, std::vector<int>> keyToFingerMap;
     double score;
 
-    Keyboard(const std::vector<Key> &keys, const std::vector<Finger> fingers, const std::unordered_map<char, Key> &charToKeyMap) 
+    Keyboard(std::string_view sv) 
             : keys(keys), fingers(fingers), charToKeyMap(charToKeyMap), score(0) {}
     
 
@@ -42,15 +44,5 @@ public:
         }
     }
 
-    constexpr void initialiseFingers()
-    {
-        fingers.push_back(Finger(0, 0, 2.25, 2.25, 0.6));
-        fingers.push_back(Finger(1, 0, 3.25, 2.25, 0.8));
-        fingers.push_back(Finger(2, 0, 4.25, 2.25, 1));
-        fingers.push_back(Finger(3, 0, 5.25, 2.25, 0.8));
-        fingers.push_back(Finger(4, 1, 8.25, 2.25, 0.6));
-        fingers.push_back(Finger(5, 1, 9.25, 2.25, 0.8));
-        fingers.push_back(Finger(6, 1, 10.25, 2.25, 1));  
-        fingers.push_back(Finger(7, 1, 11.25, 2.25, 0.8));
-    }
+
 };

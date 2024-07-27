@@ -1,8 +1,10 @@
-#include <iostream>
-#include <unordered_map>
+#pragma once
+
+#include <utility>
+#include <variant>
 #include <vector>
-#include <string>
-#include <algorithm>
+
+using assignedFingers = std::variant<int, std::pair<int, int>>;
 
 class Key {
 public:
@@ -10,17 +12,10 @@ public:
     std::pair<int, int> position;
     char regular_char;
     char shift_char;
-    std::vector<int> finger_ids;
+    std::vector<assignedFingers> finger_ids;
 
-    Key(int key_id, std::pair<int, int> pos, char reg_char, char sh_char, std::vector<int> fings)
-        : id(key_id), position(pos), regular_char(reg_char), shift_char(sh_char), finger_ids(fings) {}
+    Key(int key_id, std::pair<int, int> pos, char reg_char, char sh_char, 
+        std::vector<assignedFingers> fings);
 
-    void print() const {
-        std::cout << "Key(ID: " << id << ", Position: (" << position.first << ", " << position.second
-                  << "), Regular: '" << regular_char << "', Shift: '" << shift_char << "', Fingers: [";
-        for (const auto &finger_id : finger_ids) {
-            std::cout << finger_id << " ";
-        }
-        std::cout << "])" << std::endl;
-    }
+    void print() const; 
 };

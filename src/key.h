@@ -1,21 +1,20 @@
-#pragma once
+#ifndef KEY_H
+#define KEY_H
 
+#include <iostream>
 #include <utility>
-#include <variant>
-#include <vector>
-
-using assignedFingers = std::variant<int, std::pair<int, int>>;
 
 class Key {
 public:
+    Key(int id, std::pair<int, int> pos, char reg_char, char sh_char, int fing);
+
+    void print() const;
+
     int id;
     std::pair<int, int> position;
     char regular_char;
     char shift_char;
-    assignedFingers finger_ids;
-
-    Key(int key_id, std::pair<int, int> pos, char reg_char, char sh_char, 
-        std::vector<assignedFingers> fings);
-
-    void print() const; 
+    int finger_id;
 };
+
+#endif 

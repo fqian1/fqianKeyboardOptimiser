@@ -1,4 +1,7 @@
-#pragma once
+#ifndef FINGER_H
+#define FINGER_H
+
+#include "key.h"
 
 class Finger {
 public:
@@ -15,3 +18,4 @@ public:
   void move(const Key& key);
   double getDistanceTo(const Key& key);
 };
+#endif

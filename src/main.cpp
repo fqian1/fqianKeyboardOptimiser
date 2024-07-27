@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <map>
+#include "keyboard.h"
 #include "finger.h"
 #include "key.h"
 
@@ -23,7 +24,7 @@ std::vector<Key> initKeys(std::string_view sv)
 {
     std::vector<Key> keys;
 
-    int rowOffsets[4] {0, 1.5, 1.75, 0.25};
+    double rowOffsets[4] {0, 1.5, 1.75, 0.25};
     int rowKeyAmount[4] {13, 12, 12, 13};
     int fingerAssignments [4][14] ={
     { 0, 0, 1, 2, 3, 3, 4, 4, 5, 5, 6, 7, 7 },

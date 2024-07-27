@@ -1,4 +1,11 @@
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
+
 #include <unordered_map>
+#include "key.h"
+#include "finger.h"
+
+
 
 class Keyboard
 {
@@ -16,3 +23,4 @@ public:
     
     }
 };
+#endif

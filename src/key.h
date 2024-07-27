@@ -3,6 +3,8 @@
 struct Key
 {
     int id;
-    double x, y;
     int fingerId;
+    char regularChar;
+    char shiftChar;
+    double x, y;
 };

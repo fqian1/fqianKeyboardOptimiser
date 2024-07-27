@@ -12,7 +12,8 @@ public:
     double currentX, currentY;
     double homeX, homeY;
 
-    Finger(int id, bool hand, double homex, double homeY, double dexterity) : id(id), score(0), isUsed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
+    Finger(int id, bool hand, double homex, double homeY, double dexterity)
+          : id(id), score(0), isUsed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
 
     void press(const Key& key, bool prevHand)
     {

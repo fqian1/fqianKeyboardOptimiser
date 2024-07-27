@@ -1,26 +1,39 @@
-#pragma once
-
 #include <cmath>
+#include "finger.h"
 #include "key.h"
 
 class Finger
 {
 public: 
     int id;
-    double distanceTravelled;
+    bool hand;
+    double score;
     bool isUsed;
     double dexterity;
     double currentX, currentY;
     double homeX, homeY;
 
-    Finger(int id, double homex, double homeY, double dexterity) : id(id), distanceTravelled(0), isUsed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
+    Finger(int id, bool hand, double homex, double homeY, double dexterity) : id(id), hand(hand), score(0), isUsed(false), dexterity(dexterity), currentX(homeX), currentY(homeY), homeX(homeX), homeY(homeY) {}
 
-    void press(const Key& key)
+    void press(const Key& key, bool prevHand)
     {
         double dist = std::sqrt(std::pow(key.x - currentX, 2) + std::pow(key.y - currentY, 2));
-        distanceTravelled += dist * (1/dexterity) * isUsed ? 2 : 1;
+        score += std::pow(dist, 1/dexterity) + (isUsed ? 1 : 0) + (prevHand == hand ? 0.5 : 0);
         currentX = key.x;
         currentY = key.y;
         isUsed = true;
+    }
+
+    void move(const Key& key)
+    {
+        currentX = key.x;
+        currentY = key.y;
+    }
+
+    void release()
+    {
+        isUsed = false;
+        currentX = homeX;
+        currentY = homeY;
     }
 };

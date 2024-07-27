@@ -12,7 +12,7 @@ public:
     std::pair<int, int> position;
     char regular_char;
     char shift_char;
-    std::vector<assignedFingers> finger_ids;
+    assignedFingers finger_ids;
 
     Key(int key_id, std::pair<int, int> pos, char reg_char, char sh_char, 
         std::vector<assignedFingers> fings);

@@ -13,4 +13,5 @@ public:
   void press(const Key& key);
   void returnToHome();
   void move(const Key& key);
+  double getDistanceTo(const Key& key);
 };

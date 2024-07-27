@@ -29,6 +29,11 @@ public:
         isUsed = true;
     }
 
+    double getDistanceTo(const Key& key)
+    {
+        return distance(current_position, key.position);
+    }
+
     void returnToHome()
     {
         isUsed = false;

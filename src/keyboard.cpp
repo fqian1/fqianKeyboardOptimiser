@@ -26,13 +26,15 @@ public:
         }
     }
 
-    void type(const std::string_view text)
+    int evaluate(const std::string_view text)
     {
+        int score{0};
         for(char c : text)
         {
             int keyId = charToKeyMap['c'];
             int fingerId = keyToFingersMap[keyId];
             fingers[fingerId].press(keys[keyId]);
         }
+        return score;
     }
 };

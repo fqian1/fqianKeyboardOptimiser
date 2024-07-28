@@ -15,10 +15,11 @@ inline double Finger::distance(const std::pair<double, double>& p1, const std::p
 
 double Finger::press(const Key& key)
 {
-    score += std::pow(Finger::distance(current_position, key.position), 1/dexterity) + (isUsed ? 1 : 0); 
+    double x{std::pow(Finger::distance(current_position, key.position), 1/dexterity) + (isUsed ? 1 : 0)};
+    score += x; 
     current_position = key.position;
     isUsed = true;
-    return score;
+    return x;
 }
 
 double Finger::getDistanceTo(const Key& key)

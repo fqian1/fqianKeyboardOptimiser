@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <map>
+#include <codecvt>
 #include "keyboard.h"
 #include "finger.h"
 #include "key.h"
@@ -20,7 +21,7 @@ std::vector<Finger> initFingers()
     return fingers;
 }
 
-std::vector<Key> initKeys(std::string_view sv)
+std::vector<Key> initKeys(std::wstring_view sv)
 {
     std::vector<Key> keys;
 
@@ -40,7 +41,14 @@ std::vector<Key> initKeys(std::string_view sv)
         {
             double x{col + 0.5 + rowOffsets[row]};
             int fingerId{fingerAssignments[row][col]};
-            keys.push_back(Key(keyId, std::pair<double, double>(x, y), sv[keyId], sv[keyId + 50], fingerAssignments[row][col]));
+            if((row == 3 && col == 0 )|| (row == 3 && col == 12))
+            {
+                keys.push_back(Key(keyId, std::pair<double, double>(x, y), '\0', '\0', fingerAssignments[row][col]));
+            }
+            else
+            {
+                keys.push_back(Key(keyId, std::pair<double, double>(x, y), sv[keyId], sv[keyId + 48], fingerAssignments[row][col]));
+            }
             keyId++;
         }
     }
@@ -49,8 +57,10 @@ std::vector<Key> initKeys(std::string_view sv)
 
  int main()
  {
-    std::string charLayout{R"(`1234567890-=qwertyuiop[]asdfghjkl;'#\zxcvbnm,./¬!"£$%^&*()_+QWERTYUIOP{}ASDFGHJKL:@~|ZXCVBNM<>?)"}; //qwerty
-    std::string_view sv{charLayout};
+    std::locale::global(std::locale("en_US.UTF-8"));
+    std::wstring charLayout = LR"(`1234567890-=qwertyuiop[]asdfghjkl;'#\zxcvbnm,./¬!"£$%^&*()_+QWERTYUIOP{}ASDFGHJKL:@~|ZXCVBNM<>?)"; //qwerty
+    std::wstring_view sv{charLayout};
+
     std::vector<Key> keys {initKeys(sv)};
     std::vector<Finger> fingers {initFingers()};
 

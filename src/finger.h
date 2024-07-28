@@ -17,7 +17,8 @@ public:
   static inline double distance(const std::pair<double, double>& p1, const std::pair<double, double>& p2);
   double press(const Key& key);
   void returnToHome();
-  void move(const Key& key);
+  void moveToKey(const Key& key);
+  void moveToPos(const std::pair<double, double> pos);
   double getDistanceTo(const Key& key);
   void print() const;
 };

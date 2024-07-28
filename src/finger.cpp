@@ -33,8 +33,13 @@ void Finger::returnToHome()
     current_position = home_position;
 }
 
-void Finger::move(const Key& key) {
+void Finger::moveToKey(const Key& key) {
     current_position = key.position;
+}
+
+void Finger::moveToPos(std::pair<double, double> pos)
+{
+    current_position = std::pair<double, double>(home_position.first + pos.first, home_position.second + pos.first);
 }
 
 void Finger::print() const{

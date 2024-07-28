@@ -40,7 +40,7 @@ double Keyboard::evaluate(const std::string_view text)
             previousFingers[fingerId] = 0;// If finger was just used, don't return to home this iteration
 
             // Return fingers to home after 1 iteration delay
-            for(int previousFinger : previousFingers)
+            for(bool previousFinger : previousFingers)
             {
                 if(previousFinger == true)
                 {

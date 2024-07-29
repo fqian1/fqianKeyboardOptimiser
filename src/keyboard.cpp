@@ -77,9 +77,21 @@ double Keyboard::evaluate(const std::wstring_view text)
                 break;
             }
 
-            if(static)
+            // if key is shift key, get pinky to press shift button on opposite side
+            if(!keys[keyId].isRegular(c))
+            {
+                if(fingerId > 3)
+                {
+                    fingers[7].press(keys[charToKeyMap[L'→']]);
+                    currentFingers[7] = 1;
+                }
+                else
+                {
+                    fingers[0].press(keys[charToKeyMap[L'←']]);
+                    currentFingers[0] = 1;
+                }
+            }
 
- 
             // if a finger has just moved (is in current finger), remove it from the previous finger queue if it belongs in it
             for(int i{0}; i < 8; i ++)
             {

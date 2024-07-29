@@ -43,11 +43,11 @@ std::vector<Key> initKeys(std::wstring_view sv)
             int fingerId{fingerAssignments[row][col]};
             if(row == 3 && col == 0 )
             {
-                keys.push_back(Key(keyId, std::pair<double, double>(x, y), '←', '←', fingerAssignments[row][col]));
+                keys.push_back(Key(keyId, std::pair<double, double>(x, y), L'←', L'←', fingerAssignments[row][col]));
             }
             else if(row == 3 && col == 12)
             {
-                keys.push_back(Key(keyId, std::pair<double, double>(x, y), '→', '→',  fingerAssignments[row][col]));
+                keys.push_back(Key(keyId, std::pair<double, double>(x, y), L'→', L'→',  fingerAssignments[row][col]));
             }
             else
             {

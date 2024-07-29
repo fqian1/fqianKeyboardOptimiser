@@ -11,7 +11,7 @@ public:
     std::wstring_view charLayout;
     std::vector<Key> keys;
     std::vector<Finger> fingers;
-    std::unordered_map<char, int> charToKeyMap;
+    std::unordered_map<wchar_t, int> charToKeyMap;
     std::unordered_map<int, int> keyToFingersMap;
     double score;
 

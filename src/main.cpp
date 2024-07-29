@@ -62,15 +62,22 @@ std::vector<Key> initKeys(std::wstring_view sv)
  int main()
  {
     std::locale::global(std::locale("en_US.UTF-8"));
+    std::wcout.imbue(std::locale());
     std::wstring charLayout = LR"(`1234567890-=qwertyuiop[]asdfghjkl;'#\zxcvbnm,./¬!"£$%^&*()_+QWERTYUIOP{}ASDFGHJKL:@~|ZXCVBNM<>?)"; //qwerty
     std::wstring_view sv{charLayout};
 
     std::vector<Key> keys {initKeys(sv)};
     std::vector<Finger> fingers {initFingers()};
 
+    /*
     for(auto& key : keys)
     {
         key.print();
     }
+    */
+
+    Keyboard kb(charLayout, keys, fingers);
+
+    std::wcout << std::to_wstring(kb.evaluate(L"alsdjfaADSFAFvhaiKJJOPDISADFWQEVCIUHhv")) << std::endl; 
     return 0;
  } 

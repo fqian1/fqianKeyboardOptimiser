@@ -7,9 +7,9 @@ Key::Key(int id, std::pair<double, double> pos, wchar_t reg_char, wchar_t sh_cha
 
 void Key::print() const 
 {
-    std::wcout << "Key(ID: " << id << ", Position: (" << position.first << ", " << position.second
-                << "), Regular: '" << regular_char << "', Shift: '" << shift_char << "', Finger: "
-                << finger_id << ")" << std::endl;
+    std::wcout << L"Key(ID: " << id << L", Position: (" << position.first << L", " << position.second
+                << L"), Regular: '" << regular_char << L"', Shift: '" << shift_char << L"', Finger: "
+                << finger_id << L")" << std::endl;
 }
 
 bool Key::isRegular(wchar_t c) const

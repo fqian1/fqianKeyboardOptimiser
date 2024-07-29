@@ -20,7 +20,8 @@ Keyboard::Keyboard(std::wstring_view charLayout, const std::vector<Key>& keys, c
 double Keyboard::evaluate(const std::wstring_view text)
 {
     // the score depends on how far the finger has to move
-    int score{0};
+    std::wcout.imbue(std::locale());
+    double score{0};
     bool currentFingers[8] {0};
     bool previousFingers[8] {0};
 
@@ -37,10 +38,11 @@ double Keyboard::evaluate(const std::wstring_view text)
             int fingerId = keyToFingersMap[keyId];
 
             // press the assigned finger and tally up the score, set status to current finger
+            std::wcout << "keyboard score: " << std::to_wstring(score) << "\n";
             score += fingers[fingerId].press(keys[keyId]);
             currentFingers[fingerId] = 1;
 
-            // move positions of adjacent fingers to active finger and set to current finger status
+            // shift positions of adjacent fingers in same direction as active finger
             std::pair<double, double> smallShiftAmount{std::pair<double, double>(0, keys[keyId].position.second / 2)};
             std::pair<double, double> largeShiftAmount{std::pair<double, double>(0, keys[keyId].position.second)};
             switch(fingerId)
@@ -77,20 +79,26 @@ double Keyboard::evaluate(const std::wstring_view text)
                 break;
             }
 
+            std::wcout << L"Letter: " << c << L" was typed\n";
+            std::wcout << L"Key : ";
+            keys[keyId].print();
             // if key is shift key, get pinky to press shift button on opposite side
             if(!keys[keyId].isRegular(c))
             {
                 if(fingerId > 3)
                 {
-                    fingers[7].press(keys[charToKeyMap[L'→']]);
-                    currentFingers[7] = 1;
+                    fingers[0].moveToKey(keys[charToKeyMap[L'→']]);
+                    currentFingers[0] = 1;
+                    std::wcout << L"Left shift pressed\n";
                 }
                 else
                 {
-                    fingers[0].press(keys[charToKeyMap[L'←']]);
-                    currentFingers[0] = 1;
+                    fingers[7].moveToKey(keys[charToKeyMap[L'←']]);
+                    currentFingers[7] = 1;
+                    std::wcout << L"Right shift pressed\n";
                 }
             }
+            std::wcout << L"Finger: " << fingerNames[fingerId] << L" was pressed\n";
 
             // if a finger has just moved (is in current finger), remove it from the previous finger queue if it belongs in it
             for(int i{0}; i < 8; i ++)
@@ -102,14 +110,16 @@ double Keyboard::evaluate(const std::wstring_view text)
             }
 
             // Return fingers to home after 1 iteration delay (if it is in prev fingers queue)
-            for(bool previousFinger : previousFingers)
+            for(int i{0}; i < 8; i++)
             {
-                if(previousFinger == true)
+                if(previousFingers[i])
                 {
-                    fingers[fingerId].returnToHome();
+                    fingers[i].returnToHome();
+                    std::wcout << fingerNames[i] << L" returned back to home" << "\n";
                 }
             }
         }
+        std::cout << "\n";
     }
     return score;
 }

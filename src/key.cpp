@@ -11,3 +11,8 @@ void Key::print() const
                 << "), Regular: '" << regular_char << "', Shift: '" << shift_char << "', Finger: "
                 << finger_id << ")" << std::endl;
 }
+
+bool Key::isRegular(wchar_t c) const
+{
+    return c == regular_char ? true : false;
+}

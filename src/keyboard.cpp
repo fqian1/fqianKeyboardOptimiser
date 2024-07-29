@@ -24,7 +24,7 @@ double Keyboard::evaluate(const std::wstring_view text)
     bool currentFingers[8] {0};
     bool previousFingers[8] {0};
 
-    for(char c : text)
+    for(wchar_t c : text)
     {
         // copy last iterations current fingers into previous fingers queue
         std::copy(currentFingers, currentFingers + 8, previousFingers);
@@ -77,6 +77,9 @@ double Keyboard::evaluate(const std::wstring_view text)
                 break;
             }
 
+            if(static)
+
+ 
             // if a finger has just moved (is in current finger), remove it from the previous finger queue if it belongs in it
             for(int i{0}; i < 8; i ++)
             {

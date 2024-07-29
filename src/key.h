@@ -9,6 +9,7 @@ public:
     Key(int id, std::pair<double, double> pos, wchar_t reg_char, wchar_t sh_char, int fing);
 
     void print() const;
+    bool isRegular(wchar_t c) const;
 
     int id;
     std::pair<double, double> position;
